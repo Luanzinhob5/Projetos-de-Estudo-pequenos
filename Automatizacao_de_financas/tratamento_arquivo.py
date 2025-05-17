@@ -1,29 +1,24 @@
 import pandas as pd
+from openpyxl.workbook import Workbook
 
+tabela_zerada = {
+    "Gastos":["Ganhos","","Essenciais","Casa","Prazeres","Investimentos","Conhecimento","Bet"],
+    "Valor":[0,"",0, 0, 0, 0, 0, 0]
+    }
 
-tabela_zerada = {"Gastos":
-        {"Custos Fixos":0,
-         "Conforto":0,
-         "Metas":0,
-         "Prazeres":0,
-         "Liberdade Financeira":0,
-         "Conhecimento":0,
-         },
-         "Valor":{},
-        }
-
-class EnviarArquivo:
+class TratarArquivo:
     def __init__(self):
-        pass
-
-    def create_csv(self):
         try:
-            self.data = pd.read_csv("financas.csv")
+            self.data = pd.read_excel("financas_maio.xlsx")
         except:
-            pd.DataFrame(tabela_zerada).to_csv("financas.csv")
+            self.data = pd.DataFrame(tabela_zerada)
+            self.data.to_excel("financas_maio.xlsx", index=False)
 
-    def add_conteudo(self, categoria, tipo, valor):
-        if tipo in self.data[categoria]:
-            self.data.loc[self.data['Categoria'] == categoria, 'Valor'] += valor
+    def add_conteudo(self, categoria, valor):
+        if int(valor) <= 0:
+            print("gay")
+        elif categoria in self.data["Gastos"].values:
+           self.data.loc[self.data["Gastos"] == categoria, 'Valor'] += int(valor)
+           
+        self.data.to_excel("financas_maio.xlsx", index=False)
 
-            

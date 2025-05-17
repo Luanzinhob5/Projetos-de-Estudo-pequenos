@@ -1,9 +1,9 @@
 import customtkinter as ctk
-from tratamento_arquivo import EnviarArquivo
+from tratamento_arquivo import TratarArquivo
 
 class Interface:
-    def __init__(self, envio):
-        self.envio = envio 
+    def __init__(self):
+        self.enviar_arquivo = TratarArquivo()
         #Configuracao da cor da aparencia
         ctk.set_appearance_mode("dark")
 
@@ -12,7 +12,6 @@ class Interface:
         self.app.title("Automatizador de Financas")
         self.app.geometry("400x500")
         self.valor()
-        self.gasto()
         self.scrollableframe()
         self.app.mainloop()
 
@@ -24,16 +23,7 @@ class Interface:
         #Entry do valor
         self.entry_valor = ctk.CTkEntry(self.app)
         self.entry_valor.place(x=130,y=90)
-
-
-    #Funcao do gasto
-    def gasto(self):
-        #label do gasto
-        self.label_nome_gasto = ctk.CTkLabel(self.app, text="Nome do gasto:")
-        self.label_nome_gasto.place(x=130,y=120)
-        #Entry do gasto
-        self.entry_nome_gasto = ctk.CTkEntry(self.app)
-        self.entry_nome_gasto.place(x=130,y=150)
+        
     #Funcao do Scrollable Frame
     def scrollableframe(self):
         #Criacao do scrollableframe
@@ -41,14 +31,48 @@ class Interface:
         self.frame_categoria.place(x=115,y=200)
 
         #Button do Scrollable Frame
-        self.button_entrada_de_saldo = ctk.CTkButton(self.frame_categoria, text="Ganho").pack(pady=5)
-        self.button_custos_fixos = ctk.CTkButton(self.frame_categoria, text="Custos Fixos").pack(pady=5)
-        self.button_conforto = ctk.CTkButton(self.frame_categoria, text="Conforto").pack(pady=5)
-        self.button_prazeres = ctk.CTkButton(self.frame_categoria, text="Prazeres").pack(pady=5)
-        self.button_metas = ctk.CTkButton(self.frame_categoria, text="Metas").pack(pady=5)
-        self.button_conhecimento = ctk.CTkButton(self.frame_categoria, text="Conhecimento").pack(pady=5)
-        self.button_liberdade_financeira = ctk.CTkButton(self.frame_categoria, text="Liberdade Financeira",command=self.envio).pack(pady=5)
+        self.button_ganhos= ctk.CTkButton(self.frame_categoria, text="Ganhos",command=self.entrada_ganhos).pack(pady=5)
+        self.button_essenciais = ctk.CTkButton(self.frame_categoria, text="Essenciais",command=self.entrada_essenciais).pack(pady=5)
+        self.button_casa = ctk.CTkButton(self.frame_categoria, text="Casa",command=self.entrada_casa).pack(pady=5)
+        self.button_prazeres = ctk.CTkButton(self.frame_categoria, text="Prazeres",command=self.entrada_prazeres).pack(pady=5)
+        self.button_investimento = ctk.CTkButton(self.frame_categoria, text="Investimento",command=self.entrada_investimento).pack(pady=5)
+        self.button_conhecimento = ctk.CTkButton(self.frame_categoria, text="Conhecimento",command=self.entrada_conhecimento).pack(pady=5)
+        self.button_bet = ctk.CTkButton(self.frame_categoria, text="Bet",command=self.entrada_bet).pack(pady=5)
 
+    def entrada_ganhos(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Ganhos"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
+
+    def entrada_essenciais(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Essenciais"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
+
+    def entrada_casa(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Casa"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
+
+    def entrada_prazeres(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Prazeres"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
+
+    def entrada_investimento(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Investimento"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
+        
+    def entrada_conhecimento(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Conhecimento"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
+
+    def entrada_bet(self):
+            self.valor = self.entry_valor.get()
+            categoria = "Bet"
+            self.enviar_arquivo.add_conteudo(categoria,self.valor)
 
 
         

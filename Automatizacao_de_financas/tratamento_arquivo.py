@@ -16,7 +16,7 @@ class TratarArquivo:
 
     def add_conteudo(self, categoria, valor):
         if int(valor) <= 0:
-            print("gay")
+            print("ola")
         elif categoria in self.data["Gastos"].values:
            self.data.loc[self.data["Gastos"] == categoria, 'Valor'] += int(valor)
            

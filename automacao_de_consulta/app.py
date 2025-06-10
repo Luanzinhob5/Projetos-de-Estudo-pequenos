@@ -55,6 +55,7 @@ for link in links_abrir_processo:
     link.click()
     sleep(5)
     janelas_abertas = driver.window_handles
+    
     # Ve se a janela aberta e a que foi aberta no momento
     for janela in janelas_abertas:
         if janela not in janela_principal:
